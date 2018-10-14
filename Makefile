@@ -6,7 +6,8 @@ run: hey-cuda
 
 prof: hey-cuda main-slow
 	/usr/local/cuda-9.1/bin/nvprof ./hey-cuda
-	/usr/local/cuda-9.1/bin/nvprof ./main-slow
+	time ./hey-cuda
+	time ./main-slow
 
 hey-cuda: main.cu
 	${CC} -ccbin g++-6 main.cu -o hey-cuda

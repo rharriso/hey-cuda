@@ -6,9 +6,12 @@
 int main () {
   int N = 8000 * 8000; // 800px x 800px image
   int iterations = 10;
-  auto x = std::vector<float>(N);
-  auto y = std::vector<float>(N);
-  auto output = std::vector<float>(N);
+  int size = N*sizeof(float);
+  float *x, *y, *output;
+  
+  x = (float *) malloc(size);
+  y = (float *) malloc(size);
+  output = (float *) malloc(size);
     
   for (int i = 0; i < N; i++) {
     x[i] = ((float) std::rand()) / (float) RAND_MAX;
@@ -21,6 +24,10 @@ int main () {
       output[i] = x[i] + y[i];
     }
   }
+
+  free(x);
+  free(y);
+  free(output);
 
   return 0;
 }
