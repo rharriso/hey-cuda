@@ -1,2 +1,4 @@
 /hey-cuda
 /main-slow
+/main-cpu
+/main-thrust
