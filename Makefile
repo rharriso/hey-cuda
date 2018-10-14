@@ -5,7 +5,7 @@ PROF:=/usr/local/cuda-9.1/bin/nvprof
 run: main-cuda.cuda 
 	./main-cuda.cuda
 
-prof: main-cuda.cuda main-cpu main-thrust
+prof: main-cuda main-cpu main-thrust
 	${PROF} ./main-cuda.cuda
 	@echo
 	${PROF} ./main-thrust
@@ -16,8 +16,8 @@ prof: main-cuda.cuda main-cpu main-thrust
 	@echo
 	time ./main-cpu
 
-main-cuda.cuda: main-cuda.cu
-	${CC} -ccbin g++-6 main-cuda.cu -o main-cuda.cuda
+main-cuda: main-cuda.cu
+	${CC} -ccbin g++-6 main-cuda.cu -o main-cuda
 
 main-thrust: main-thrust.cu
 	${CC} -ccbin g++-6 main-thrust.cu -o main-thrust
