@@ -1,20 +1,19 @@
 CC:=/usr/local/cuda-9.1/bin/nvcc
 PROF:=/usr/local/cuda-9.1/bin/nvprof
 
-
-run: main-cuda.cuda 
-	./main-cuda.cuda
+run: main-cuda 
+	./main-cuda
 
 prof: main-cuda main-cpu main-thrust
-	${PROF} ./main-cuda.cuda
+	${PROF} ./main-cuda
 	@echo
 	${PROF} ./main-thrust
 	@echo
-	time ./main-cuda.cuda
+	time -v ./main-cuda
 	@echo
-	time ./main-thrust
+	time -v ./main-thrust
 	@echo
-	time ./main-cpu
+	time -v ./main-cpu
 
 main-cuda: main-cuda.cu
 	${CC} -ccbin g++-6 main-cuda.cu -o main-cuda
