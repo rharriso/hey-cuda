@@ -22,6 +22,21 @@ struct initRandomPrg
   }
 };
 
+struct addPrg
+{
+  //thrust::device_vector a, b;
+
+  __host__ __device__
+  //addPrg(thrust::device_vector _a, thrust::device_vector _b) : a(_a), b(_b) {};
+  addPrg() {};
+
+  __host__ __device__
+  float operator()(const float a, const float b) const
+  {
+    return a + b;
+  }
+};
+
 
 int main() {
   int N = 8000 * 8000; // 800px x 800px image
@@ -55,9 +70,14 @@ int main() {
         x.begin(), x.end(),
         y.begin(),
         output.begin(),
-        thrust::plus<float>()
+        //thrust::plus<float>()
+        addPrg()
     );
   }
+
+  /*for (int i = 0; i < N; i++) {
+    std::cout << x[i] + y[i] << ' ' << output[i] << '\n';
+  }*/
 
   return 0;
 }
