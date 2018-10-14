@@ -1,22 +1,23 @@
 CC:=/usr/local/cuda-9.1/bin/nvcc
+PROF:=/usr/local/cuda-9.1/bin/nvprof
 
 
-run: main-cuda 
-	./main-cuda
+run: main-cuda.cuda 
+	./main-cuda.cuda
 
-prof: main-cuda main-cpu main-thrust
-	/usr/local/cuda-9.1/bin/nvprof ./main-cuda
+prof: main-cuda.cuda main-cpu main-thrust
+	${PROF} ./main-cuda.cuda
 	@echo
-	/usr/local/cuda-9.1/bin/nvprof ./main-thrust
+	${PROF} ./main-thrust
 	@echo
-	time ./main-cuda
+	time ./main-cuda.cuda
 	@echo
 	time ./main-thrust
 	@echo
 	time ./main-cpu
 
-main-cuda: main.cu
-	${CC} -ccbin g++-6 main.cu -o main-cuda
+main-cuda.cuda: main-cuda.cu
+	${CC} -ccbin g++-6 main-cuda.cu -o main-cuda.cuda
 
 main-thrust: main-thrust.cu
 	${CC} -ccbin g++-6 main-thrust.cu -o main-thrust
